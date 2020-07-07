@@ -1,0 +1,34 @@
+.container{
+    
+    .row{
+        height: 100vh;
+        .left-portion{
+            background: #000;
+            width: 100%;
+                .row{
+                    .person{
+                        color: #fff;
+
+                        &::before{
+                            content: "";
+                            height: 10px;
+                            width: 98%;
+                            background: red;
+                            position: absolute;
+                            top: 55px;
+                            left: 16px;
+                        }
+
+                        .contact{
+                            margin-top: 45px;
+                        }
+                    }
+                }
+            
+        }
+        .right-portion{
+            background: #fff !important;
+            width: 100%;
+        }
+    }
+}

@@ -28,9 +28,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/mdbootstrap/css/bootstrap.min.css",
+              "./node_modules/mdbootstrap/css/mdb.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/mdbootstrap/js/jquery.min.js",
+              "./node_modules/mdbootstrap/js/bootstrap.min.js",
+              "./node_modules/mdbootstrap/js/mdb.min.js"
+            ]
           },
           "configurations": {
             "production": {
