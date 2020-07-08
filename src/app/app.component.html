@@ -1,22 +1,56 @@
 <div class="container">
+  <button class="btn btn-sm btn-primary" (click)="preview()">Preview</button>
+  <button class="btn btn-sm btn-warning" (click)="edit()">Edit</button>
   <div class="row">
     <div class="col-md-7 left-portion">
         <div class="row mt-5">
           <div class="col-md-2"></div>
           <div class="col-md-10 person">
             <div class="name">
-              <h2>Tonmoy Chiran</h2>
+              <button class="btn btn-sm btn-success" (click)="addName()" [ngStyle]="{'display': nameAddBtnStyle}"><fa-icon [icon]="faAdd"></fa-icon></button>
+              <input type="text" class="input-control" [ngStyle]="{'display': nameInputStyle}" (change)="setName($event.target.value)" value="{{name}}">
+              <h2>{{name}}</h2> <span><button class="btn btn-sm btn-warning" (click)="changeName()" [ngStyle]="{'display': nameEditBtnStyle}"><fa-icon [icon]="faEdit"></fa-icon></button></span>
             </div>
             <div class="contact">
-              <p>tonmoychiran449@gmail.com</p>
-              <p>+8801869701485</p>
-              <p>https://chiran-tonmoy.netlify.app</p>
+              <p><span><fa-icon [icon]="faEmail"></fa-icon></span>  tonmoychiran449@gmail.com</p>
+              <p><span><fa-icon [icon]="faPhone"></fa-icon></span> +8801869701485</p>
+              <p><span><fa-icon [icon]="faWeb"></fa-icon></span> https://chiran-tonmoy.netlify.app</p>
+            </div>
+            <div class="experience mt-5">
+              <h2 class="mb-5">Experience</h2>
+              <h2>Web-Developer(2020-Present)</h2>
+              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                Ratione impedit temporibus officia vel necessitatibus provident sequi eaque, 
+                laborum ipsa ducimus explicabo dolores esse? Quam, blanditiis dolorum velit quas earum nulla.</p>
+            </div>
+            <div class="education mt-5">
+              <h2 class="mb-5">Education</h2>
+              <h3>Daffodil International University (2018-Present)</h3>
+              <h4>Bachelor Of Science</h4>
+              <h5>Software Engineering</h5>
             </div>
           </div>
         </div>
     </div>
-    <div class="col-md-5 right-portion">
-      <h2>Hello</h2>
+    <div class="col-md-3 right-portion">
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <img src="assets/person.png" alt="" width="100%" >
+          <div class="profile mt-5">
+            <h3>Profile</h3>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+              Non voluptatum ipsa officia? Esse vero aliquid quaerat fuga 
+              deleniti ratione architecto commodi sit corporis vitae eligendi, veniam illum accusantium, doloremque eum!</p>
+          </div>
+          <div class="skill mt-5">
+            <h2>Skills</h2>
+            <div class="skill-list">
+              <h5>Node Js</h5>
+              <h5>Java</h5>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

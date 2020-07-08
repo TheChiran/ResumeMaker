@@ -9,18 +9,39 @@
                     .person{
                         color: #fff;
 
-                        &::before{
-                            content: "";
-                            height: 10px;
-                            width: 98%;
-                            background: red;
-                            position: absolute;
-                            top: 55px;
-                            left: 16px;
+                        // &::before{
+                        //     content: "";
+                        //     height: 10px;
+                        //     width: 98%;
+                        //     background: red;
+                        //     position: absolute;
+                        //     top: 55px;
+                        //     left: 16px;
+                        // }
+
+                        .name{
                         }
 
                         .contact{
                             margin-top: 45px;
+                        }
+
+                        .experience{
+                            h2{
+                                text-align: right;
+                            }
+
+                            p{
+                                text-align: justify;
+                            }
+                        }
+
+                        .education{
+                            text-align: right;
+
+                            h3{
+                                font-size: 20px;
+                            }
                         }
                     }
                 }
@@ -29,6 +50,27 @@
         .right-portion{
             background: #fff !important;
             width: 100%;
+
+            .profile{
+                h2{
+                    text-transform: uppercase;
+                }
+                p{
+                    text-align: justify;
+                }
+            }
+
+            .skill{
+                h2{
+                    text-transform: uppercase;
+                }
+                ul{
+                    list-style: none;
+                    li{
+                        text-decoration: none;
+                    }
+                }
+            }
         }
     }
 }
