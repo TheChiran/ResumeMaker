@@ -6,6 +6,8 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faCross } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl } from '@angular/forms';
+import * as jspdf from 'jspdf';  
+import html2canvas from 'html2canvas'; 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -272,6 +274,27 @@ export class AppComponent {
   deleteSkill(index){
     this.skill.splice(index,1);
   }
+
+  //image
+  url:any = '';
+  fileInputDisplay:any='block';
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.url = event.target.result;
+      }
+    }
+  }
+  enableFilePreviewMode(){
+    this.fileInputDisplay='none';
+  }
+  enableFileChangeMode(){
+    this.fileInputDisplay='block';
+  }
   //to add padding on add experience and education
   addPadding(){
     this.paddingBottomValue += 100;
@@ -287,6 +310,7 @@ export class AppComponent {
     this.enableEducationEditMode();
     this.enableProfileEditMode();
     this.enableSkillEditMode();
+    this.enableFileChangeMode();
   }
   //to see on preview mode
   previewMode(){
@@ -298,5 +322,24 @@ export class AppComponent {
     this.enableEducationPreviewMode();
     this.enableProfilePreviewMode();
     this.enableSkillPreviewMode();
+    this.enableFilePreviewMode();
+  }
+
+  public exportDocument()  
+  {  
+    var data = document.getElementById('exportContents');  
+    html2canvas(data).then(canvas => {  
+      // Few necessary setting options  
+      var imgWidth = 208;   
+      var pageHeight = 295;    
+      var imgHeight = canvas.height * imgWidth / canvas.width;  
+      var heightLeft = imgHeight;  
+  
+      const contentDataURL = canvas.toDataURL('image/png')  
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+      var position = 0;  
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+      pdf.save('MYPdf.pdf'); // Generated PDF   
+    });  
   }
 }

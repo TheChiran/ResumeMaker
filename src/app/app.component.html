@@ -1,7 +1,8 @@
 <div class="container">
   <button class="btn btn-sm btn-primary" (click)="previewMode()">Preview</button>
   <button class="btn btn-sm btn-warning" (click)="editMode()">Edit</button>
-  <div class="row">
+  <button class="btn btn-sm btn-success" (click)="exportDocument()">Export</button>
+  <div class="row" id="exportContents">
     <div class="col-md-7 left-portion" [ngStyle]="{'padding-bottom': paddingBottom}">
       <div class="row mt-5">
         <div class="col-md-2"></div>
@@ -110,7 +111,9 @@
     <div class="col-md-3 right-portion" [ngStyle]="{'padding-bottom': paddingBottom}">
       <div class="row mt-3">
         <div class="col-md-12">
-          <img src="assets/person.png" alt="" width="100%">
+          <img [src]="url"  width="100%"> <br/>
+          <input type='file' [ngStyle]="{'display': fileInputDisplay}"
+          (change)="onSelectFile($event)">
           <div class="profile mt-5">
             <h3>Profile</h3>
             <textarea class="form-control" name="" id="" cols="30" [ngStyle]="{'display': profileInputDisplay}"
