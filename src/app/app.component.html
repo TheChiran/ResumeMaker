@@ -1,46 +1,121 @@
 <div class="container">
-  <button class="btn btn-sm btn-primary" (click)="preview()">Preview</button>
-  <button class="btn btn-sm btn-warning" (click)="edit()">Edit</button>
+  <button class="btn btn-sm btn-primary" (click)="previewMode()">Preview</button>
+  <button class="btn btn-sm btn-warning" (click)="editMode()">Edit</button>
   <div class="row">
-    <div class="col-md-7 left-portion">
-        <div class="row mt-5">
-          <div class="col-md-2"></div>
-          <div class="col-md-10 person">
-            <div class="name">
-              <button class="btn btn-sm btn-success" (click)="addName()" [ngStyle]="{'display': nameAddBtnStyle}"><fa-icon [icon]="faAdd"></fa-icon></button>
-              <input type="text" class="input-control" [ngStyle]="{'display': nameInputStyle}" (change)="setName($event.target.value)" value="{{name}}">
-              <h2>{{name}}</h2> <span><button class="btn btn-sm btn-warning" (click)="changeName()" [ngStyle]="{'display': nameEditBtnStyle}"><fa-icon [icon]="faEdit"></fa-icon></button></span>
+    <div class="col-md-7 left-portion" [ngStyle]="{'padding-bottom': paddingBottom}">
+      <div class="row mt-5">
+        <div class="col-md-2"></div>
+        <div class="col-md-10 person">
+          <div class="name">
+            <button class="btn btn-sm btn-success" (click)="addName()" [ngStyle]="{'display': nameAddBtnStyle}">
+              <fa-icon [icon]="faAdd"></fa-icon>
+            </button>
+            <input type="text" class="form-control" [ngStyle]="{'display': nameInputStyle,'width': inputWidth}"
+              (change)="setName($event.target.value)" value="{{name}}">
+            <h2>{{name}}</h2> <span><button class="btn btn-sm btn-warning" (click)="changeName()"
+                [ngStyle]="{'display': nameEditBtnStyle}">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </button></span>
+          </div>
+          <div class="contact">
+
+            <!-- email-portion -->
+            <span><button [ngStyle]="{'display': emailAddbtn}" class="btn btn-sm btn-success" (click)="addEmail()">
+                <fa-icon [icon]="faAdd"></fa-icon>
+              </button></span>
+
+            <input type="text" class="form-control" [ngStyle]="{'display': emailInputDisplay, width: inputWidth}"
+              (change)="setEmail($event.target.value)" value="{{email}}" placeholder="{{email}}">
+
+            <p><span>
+                <fa-icon [icon]="faEmail"></fa-icon>
+              </span>
+              {{email}} <span><button [ngStyle]="{'display': emailEditbtn}" class="btn btn-sm btn-warning"
+                  (click)="editEmail()">
+                  <fa-icon [icon]="faEdit"></fa-icon>
+                </button></span></p>
+
+            <!-- phone portion -->
+
+            <span><button [ngStyle]="{'display': phoneAddbtn}" class="btn btn-sm btn-success" (click)="addPhone()">
+                <fa-icon [icon]="faAdd"></fa-icon>
+              </button></span>
+            <input type="text" class="form-control" [ngStyle]="{'display': phoneInputDisplay, width: inputWidth}"
+              (change)="setPhone($event.target.value)" value="{{phone}}" placeholder="{{phone}}">
+            <p>
+              <span>
+                <fa-icon [icon]="faPhone"></fa-icon>
+              </span>
+              {{phone}} <span><button [ngStyle]="{'display': phoneEditbtn}" class="btn btn-sm btn-warning"
+                  (click)="editPhone()">
+                  <fa-icon [icon]="faEdit"></fa-icon>
+                </button></span></p>
+
+            <!-- Website portion -->
+            <span><button [ngStyle]="{'display': personalWebsiteAddBtn}" class="btn btn-sm btn-success"
+                (click)="addWebsite()">
+                <fa-icon [icon]="faAdd"></fa-icon>
+              </button></span>
+            <input type="text" class="form-control"
+              [ngStyle]="{'display': personalWebsiteInputDisplay, width: inputWidth}"
+              (change)="setWebsite($event.target.value)" value="{{personalWebsite}}" placeholder="{{personalWebsite}}">
+
+            <p><span>
+                <fa-icon [icon]="faWeb"></fa-icon>
+              </span>
+              {{personalWebsite}} <span><button [ngStyle]="{'display': personalWebsiteEditBtn}"
+                  class="btn btn-sm btn-warning" (click)="editWebsite()">
+                  <fa-icon [icon]="faEdit"></fa-icon>
+                </button></span></p>
+          </div>
+
+          <!-- experience portion -->
+          <div class="experience mt-5">
+            <span id="experienceAddBtn"><button [ngStyle]="{'display': experienceAddBtn}" class="btn btn-sm btn-success"
+                data-toggle="modal" data-target="#experienceModal">
+                <fa-icon [icon]="faAdd"></fa-icon>
+              </button></span>
+            <h2 class="mb-5">Experience</h2>
+            <div class="content" *ngFor="let experience of experience;let i = index">
+              <h2><button [ngStyle]="{'display': experienceAddBtn}" class="btn btn-sm btn-danger"
+                  (click)="deleteExperience(i)">
+                  &times;
+                </button>{{experience.position}}</h2>
+              <h2>{{experience.year}}</h2>
+              <h2>{{experience.company}}</h2>
             </div>
-            <div class="contact">
-              <p><span><fa-icon [icon]="faEmail"></fa-icon></span>  tonmoychiran449@gmail.com</p>
-              <p><span><fa-icon [icon]="faPhone"></fa-icon></span> +8801869701485</p>
-              <p><span><fa-icon [icon]="faWeb"></fa-icon></span> https://chiran-tonmoy.netlify.app</p>
-            </div>
-            <div class="experience mt-5">
-              <h2 class="mb-5">Experience</h2>
-              <h2>Web-Developer(2020-Present)</h2>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                Ratione impedit temporibus officia vel necessitatibus provident sequi eaque, 
-                laborum ipsa ducimus explicabo dolores esse? Quam, blanditiis dolorum velit quas earum nulla.</p>
-            </div>
-            <div class="education mt-5">
-              <h2 class="mb-5">Education</h2>
-              <h3>Daffodil International University (2018-Present)</h3>
-              <h4>Bachelor Of Science</h4>
-              <h5>Software Engineering</h5>
+          </div>
+
+          <!-- educatioin portion -->
+          <div class="education mt-5">
+            <span id="educationAddBtn"><button [ngStyle]="{'display': educationAddBtn}" class="btn btn-sm btn-success"
+                data-toggle="modal" data-target="#educationModal">
+                <fa-icon [icon]="faAdd"></fa-icon>
+              </button></span>
+            <h2 class="mb-5">Education</h2>
+            <div class="educationContent" *ngFor="let education of education;let i = index">
+              <h3><button [ngStyle]="{'display': educationAddBtn}" class="btn btn-sm btn-danger"
+                (click)="deleteEducation(i)">
+                &times;
+              </button>
+                {{education.institute}}</h3>
+              <h4>{{education.graduationYear}}</h4>
+              <h5>{{education.degreeType}}</h5>
+              <h5>{{education.degreeName}}</h5>
             </div>
           </div>
         </div>
+      </div>
     </div>
-    <div class="col-md-3 right-portion">
+    <div class="col-md-3 right-portion" [ngStyle]="{'padding-bottom': paddingBottom}">
       <div class="row mt-3">
         <div class="col-md-12">
-          <img src="assets/person.png" alt="" width="100%" >
+          <img src="assets/person.png" alt="" width="100%">
           <div class="profile mt-5">
             <h3>Profile</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-              Non voluptatum ipsa officia? Esse vero aliquid quaerat fuga 
-              deleniti ratione architecto commodi sit corporis vitae eligendi, veniam illum accusantium, doloremque eum!</p>
+            <textarea class="form-control" name="" id="" cols="30" [ngStyle]="{'display': profileInputDisplay}"
+            rows="10" value="{{profile}}" (change)="setProfile($event.target.value)"></textarea>
+            <p [ngStyle]="{'display': profileDisplay}">{{profile}}</p>
           </div>
           <div class="skill mt-5">
             <h2>Skills</h2>
@@ -50,6 +125,90 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Experience Modal -->
+<div class="modal fade" id="experienceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Please Add Your Experience</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Position input -->
+        <div class="form-group">
+          <label for="formGroupExampleInput">Position</label>
+          <input type="text" class="form-control" (change)="setPosition($event.target.value)"
+            placeholder="Working Position" value="{{position}}">
+        </div>
+        <!-- Year input -->
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Year</label>
+          <input type="text" class="form-control" (change)="setYear($event.target.value)"
+            placeholder="Enter Working Year" value="{{year}}">
+        </div>
+        <!-- Institution input -->
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Company</label>
+          <input type="text" class="form-control" (change)="setCompany($event.target.value)"
+            placeholder="Enter Company Name" value="{{company}}">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">&times;</button>
+        <button type="button" class="btn btn-sm btn-primary" (click)="addExperience()">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- education Modal -->
+<div class="modal fade" id="educationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Please Add Your Education</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Position input -->
+        <div class="form-group">
+          <label for="formGroupExampleInput">Institute</label>
+          <input type="text" class="form-control" (change)="setInstitue($event.target.value)"
+            placeholder="Education Institue" value="{{institute}}">
+        </div>
+        <!-- Year input -->
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Year</label>
+          <input type="text" class="form-control" (change)="setGraduationYear($event.target.value)"
+            placeholder="Enter Graduation Year" value="{{graduationYear}}">
+        </div>
+        <!-- Degree Type input -->
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Degree Type</label>
+          <input type="text" class="form-control" (change)="setDegreeType($event.target.value)"
+            placeholder="Enter Degree Type" value="{{degreeType}}">
+        </div>
+        <!-- Degree Name input -->
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Degree Name</label>
+          <input type="text" class="form-control" (change)="setDegreeName($event.target.value)"
+            placeholder="Enter Degree Name" value="{{degreeName}}">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">&times;</button>
+        <button type="button" class="btn btn-sm btn-primary" (click)="addEducation()">Create</button>
       </div>
     </div>
   </div>

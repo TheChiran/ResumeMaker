@@ -1,9 +1,11 @@
+$container-bg: #000;
 .container{
     
     .row{
         height: 100vh;
         .left-portion{
-            background: #000;
+            background: $container-bg;
+            // padding-bottom: 250px;
             width: 100%;
                 .row{
                     .person{
@@ -24,6 +26,13 @@
 
                         .contact{
                             margin-top: 45px;
+                            p{
+                                display: flex;
+                                span{
+                                    margin: 0 5px;
+                                }
+                                
+                            }
                         }
 
                         .experience{

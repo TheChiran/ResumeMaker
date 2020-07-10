@@ -4,6 +4,8 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faCross } from '@fortawesome/free-solid-svg-icons';
+import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,14 +18,65 @@ export class AppComponent {
   faWeb = faGlobe;
   faEmail = faEnvelope;
   faPhone = faPhone;
+  faCross = faCross;
+
+  background='red';
+  inputWidth='50%';
 
 
   name:string='John Doe';
   nameInputStyle='none';
   nameAddBtnStyle='block';
   nameEditBtnStyle='none';
+
+  email:any='example@gmail.com';
+  emailInputDisplay:any='none';
+  emailAddbtn='block';
+  emailEditbtn='none';
+
+  phone:any = '+8801869701485';
+  phoneInputDisplay:any='none';
+  phoneAddbtn='block';
+  phoneEditbtn='none';
+
+  personalWebsite:any='https://example.com';
+  personalWebsiteInputDisplay:any='none';
+  personalWebsiteAddBtn:any='block';
+  personalWebsiteEditBtn:any='none';
+
+  experience:any=[];
+  position:any='';
+  company:any='';
+  year:any='';
+  experienceAddBtn:any='block';
+  experienceForm = new FormGroup({
+    position: new FormControl(),
+    company: new FormControl(),
+    year: new FormControl()
+  });
+
+  education:any=[];
+  institute:any='';
+  graduationYear:any='';
+  degreeType:any='';
+  degreeName:any='';
+  educationAddBtn:any='block';
+  educationForm = new FormGroup({
+    institute: new FormControl(),
+    graduationYear: new FormControl(),
+    degreeType: new FormControl(),
+    degreeName: new FormControl()
+  });
+
+  profile:any='Lorem Ipsum';
+  profileInputDisplay:any='block';
+  profileDisplay:any='none';
+  
   title = 'resumeMaker';
   
+  paddingBottom:any='15px';
+  paddingBottomValue=15;
+
   addName(){
     this.nameInputStyle='block';
   }
@@ -37,13 +90,180 @@ export class AppComponent {
   changeName(){
     this.nameInputStyle='block';
   }
-
-  preview(){
-    this.nameInputStyle='none';
+  //to set for preview mode
+  namePreviewMode(){
     this.nameAddBtnStyle='none';
     this.nameEditBtnStyle='none';
   }
-  edit(){
-    this.nameAddBtnStyle='block';
+  enableNameEditMode(){
+    this.nameEditBtnStyle='block';
+  }
+
+  addEmail(){
+    this.emailInputDisplay='block';
+  }
+  setEmail(email){
+    this.email=email;
+    this.emailInputDisplay='none';
+    this.emailEditbtn='block';
+    this.emailAddbtn='none';
+  }
+  editEmail(){
+    this.emailInputDisplay='block';
+  }
+  emailPreviewMode(){
+    this.emailAddbtn='none';
+    this.emailEditbtn='none';
+  }
+  enableEmailEditMode(){
+    this.emailEditbtn='block';
+  }
+
+  addPhone(){
+    this.phoneInputDisplay='block';
+  }
+  setPhone(phone){
+    this.phone=phone;
+    this.phoneInputDisplay='none';
+    this.phoneEditbtn='block';
+    this.phoneAddbtn='none';
+  }
+  editPhone(){
+    this.phoneInputDisplay='block';
+  }
+  phonePreviewMode(){
+    this.phoneAddbtn='none';
+    this.phoneEditbtn='none';
+  }
+  enablePhoneEditMode(){
+    this.phoneEditbtn='block';
+  }
+
+  addWebsite(){
+    this.personalWebsiteInputDisplay='block';
+  }
+  setWebsite(website){
+    this.personalWebsite=website;
+    this.personalWebsiteInputDisplay='none';
+    this.personalWebsiteAddBtn='none';
+    this.personalWebsiteEditBtn='block';
+  }
+  editWebsite(){
+    this.personalWebsiteInputDisplay='block';
+  }
+  websitePreviewMode(){
+    this.personalWebsiteAddBtn='none';
+    this.personalWebsiteEditBtn='none';
+  }
+  enablePersonalWebsiteEditMode(){
+    this.personalWebsiteEditBtn='block';
+  }
+
+  //to add experience
+  setPosition(position){
+    this.position=position;
+  }
+  setCompany(company){
+    this.company=company;
+  }
+  setYear(year){
+    this.year=year;
+  }
+  addExperience(){
+    this.experienceForm.setValue({position: this.position, company: this.company ,year: this.year});
+    this.experience.push(this.experienceForm.value);
+    this.experienceFormReset();
+    this.addPadding();
+    //console.log(this.experience);
+  }
+  experienceFormReset(){
+    this.position='';
+    this.year='';
+    this.company='';
+  }
+  deleteExperience(index){
+    this.experience.splice(index,1);
+  }
+  enableExperienceEditMode(){
+    this.experienceAddBtn='block';
+  }
+  experiencePreviewMode(){
+    this.experienceAddBtn='none';
+  }
+
+  //education
+  setInstitue(institute){
+    this.institute=institute;
+  }
+  setGraduationYear(year){
+    this.graduationYear=year;
+  }
+  setDegreeType(type){
+    this.degreeType=type;
+  }
+  setDegreeName(name){
+    this.degreeName=name;
+  }
+  addEducation(){
+    this.educationForm.setValue({institute: this.institute,graduationYear: this.graduationYear,
+      degreeType: this.degreeType, degreeName: this.degreeName});
+      this.education.push(this.educationForm.value);
+      this.educationFormReset();
+      this.addPadding();
+  }
+  educationFormReset(){
+    this.institute='';
+    this.graduationYear='';
+    this.degreeType='';
+    this.degreeName='';
+  }
+  deleteEducation(index){
+    this.education.splice(index,1);
+  }
+  enableEducationEditMode(){
+    this.educationAddBtn='block';
+  }
+  enableEducationPreviewMode(){
+    this.educationAddBtn='none';
+  }
+
+  setProfile(profile){
+    this.profile=profile;
+    console.log(this.profile);
+  }
+  enableProfilePreviewMode(){
+    this.profileInputDisplay='none';
+    this.profileDisplay='block';
+  }
+  enableProfileEditMode(){
+    this.profileInputDisplay='block';
+    this.profileDisplay='none';
+
+  }
+
+  //to add padding on add experience and education
+  addPadding(){
+    this.paddingBottomValue += 100;
+    this.paddingBottom = `${this.paddingBottomValue}px`;
+  }
+  //to set for edit mode
+  editMode(){
+    this.enableNameEditMode();
+    this.enableEmailEditMode();
+    this.enablePhoneEditMode();
+    this.enablePersonalWebsiteEditMode();
+    this.enableExperienceEditMode();
+    this.enableEducationEditMode();
+    this.enableProfileEditMode();
+  }
+  //to see on preview mode
+  previewMode(){
+    this.namePreviewMode();
+    this.emailPreviewMode();
+    this.phonePreviewMode();
+    this.websitePreviewMode();
+    this.experiencePreviewMode();
+    this.enableEducationPreviewMode();
+    this.enableProfilePreviewMode();
   }
 }
