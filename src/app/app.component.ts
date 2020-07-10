@@ -71,6 +71,14 @@ export class AppComponent {
   profile:any='Lorem Ipsum';
   profileInputDisplay:any='block';
   profileDisplay:any='none';
+
+  skill:any=[];
+  skillName:any='';
+  skillForm = new FormGroup({
+    skillName: new FormControl()
+  });
+  skillAddBtn='block';
+  skillDeleteBtn='block';
   
   title = 'resumeMaker';
   
@@ -227,9 +235,10 @@ export class AppComponent {
     this.educationAddBtn='none';
   }
 
+  //profile
   setProfile(profile){
     this.profile=profile;
-    console.log(this.profile);
+    //console.log(this.profile);
   }
   enableProfilePreviewMode(){
     this.profileInputDisplay='none';
@@ -241,6 +250,27 @@ export class AppComponent {
 
   }
 
+  //skill
+  setSkill(skill){
+    this.skillName=skill;
+  }
+  adSkill(){
+    this.skillForm.setValue({skillName: this.skillName});
+    this.skill.push(this.skillForm.value);
+    this.skillFormReset();
+  }
+  skillFormReset(){
+    this.skillName='';
+  }
+  enableSkillEditMode(){
+    this.skillAddBtn='block';
+  }
+  enableSkillPreviewMode(){
+    this.skillDeleteBtn='none';
+  }
+  deleteSkill(index){
+    this.skill.splice(index,1);
+  }
   //to add padding on add experience and education
   addPadding(){
     this.paddingBottomValue += 100;
@@ -255,6 +285,7 @@ export class AppComponent {
     this.enableExperienceEditMode();
     this.enableEducationEditMode();
     this.enableProfileEditMode();
+    this.enableSkillEditMode();
   }
   //to see on preview mode
   previewMode(){
@@ -265,5 +296,6 @@ export class AppComponent {
     this.experiencePreviewMode();
     this.enableEducationPreviewMode();
     this.enableProfilePreviewMode();
+    this.enableSkillPreviewMode();
   }
 }

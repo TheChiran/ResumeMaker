@@ -117,11 +117,21 @@
             rows="10" value="{{profile}}" (change)="setProfile($event.target.value)"></textarea>
             <p [ngStyle]="{'display': profileDisplay}">{{profile}}</p>
           </div>
+
+          <!-- skill-portion -->
           <div class="skill mt-5">
+            <span id="skillAddBtn"><button [ngStyle]="{'display': skillAddBtn}" class="btn btn-sm btn-success"
+              data-toggle="modal" data-target="#skillModal">
+              <fa-icon [icon]="faAdd"></fa-icon>
+            </button></span>
             <h2>Skills</h2>
-            <div class="skill-list">
-              <h5>Node Js</h5>
-              <h5>Java</h5>
+            <div class="skill-list" *ngFor="let skill of skill;let i = index">
+              <button class="btn btn-sm btn-danger"
+              (click)="deleteSkill(i)" [ngStyle]="{'display': skillDeleteBtn}">
+              &times;
+            </button> 
+              <h5>{{skill.skillName}}
+              </h5>
             </div>
           </div>
         </div>
@@ -213,3 +223,31 @@
     </div>
   </div>
 </div>
+
+<!-- Skill Modal -->
+<div class="modal fade" id="skillModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Your Skill</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Position input -->
+        <div class="form-group">
+          <label for="formGroupExampleInput">Skill</label>
+          <input type="text" class="form-control" (change)="setSkill($event.target.value)"
+            placeholder="Education Institue" value="{{skillName}}">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">&times;</button>
+        <button type="button" class="btn btn-sm btn-primary" (click)="adSkill()">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
