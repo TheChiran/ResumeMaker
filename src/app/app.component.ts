@@ -267,6 +267,7 @@ export class AppComponent {
   }
   enableSkillPreviewMode(){
     this.skillDeleteBtn='none';
+    this.skillAddBtn='none';
   }
   deleteSkill(index){
     this.skill.splice(index,1);
