@@ -87,6 +87,8 @@ export class AppComponent {
   paddingBottom:any='15px';
   paddingBottomValue=15;
 
+  preview:any=0;
+
   addName(){
     this.nameInputStyle='block';
   }
@@ -266,6 +268,7 @@ export class AppComponent {
   }
   enableSkillEditMode(){
     this.skillAddBtn='block';
+    this.skillDeleteBtn='block';
   }
   enableSkillPreviewMode(){
     this.skillDeleteBtn='none';
@@ -311,6 +314,7 @@ export class AppComponent {
     this.enableProfileEditMode();
     this.enableSkillEditMode();
     this.enableFileChangeMode();
+    this.preview=0;
   }
   //to see on preview mode
   previewMode(){
@@ -323,23 +327,35 @@ export class AppComponent {
     this.enableProfilePreviewMode();
     this.enableSkillPreviewMode();
     this.enableFilePreviewMode();
+    this.preview++;
   }
 
   public exportDocument()  
   {  
-    var data = document.getElementById('exportContents');  
-    html2canvas(data).then(canvas => {  
+    if(this.preview>=1){
+      var data = document.getElementById('exportContents');  
+       html2canvas(data).then(canvas => {  
       // Few necessary setting options  
-      var imgWidth = 208;   
-      var pageHeight = 295;    
-      var imgHeight = canvas.height * imgWidth / canvas.width;  
-      var heightLeft = imgHeight;  
+      // var imgWidth = 208;   
+      
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+      // var imgWidth = pdf.internal.pageSize.getWidth();   
+      // // var pageHeight = 395;       
+      // var pageHeight = pdf.internal.pageSize.getHeight();     
+      
+      // var imgHeight = canvas.height * imgWidth / canvas.width;  
+      // var heightLeft = imgHeight;  
+      var width = pdf.internal.pageSize.getWidth();    
+      var height = pdf.internal.pageSize.getHeight();
   
       const contentDataURL = canvas.toDataURL('image/png')  
-      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
       var position = 0;  
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
-      pdf.save('MYPdf.pdf'); // Generated PDF   
-    });  
+      pdf.addImage(contentDataURL, 'PNG', 0, position, width, height)  
+      pdf.save('resume.pdf'); // Generated PDF   
+    }); 
+    }else{
+      alert('Please Preview First!');
+    }
+     
   }
 }
